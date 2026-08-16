@@ -1,10 +1,7 @@
 /* Numbered process step: big index, "step" label, then title lower in the cell. */
 export function StepItem({ index = "01", label = "Step", title, description, style = {}, ...rest }) {
   return (
-    <div style={{
-      display: "flex", flexDirection: "column", minHeight: "260px",
-      padding: "0 clamp(20px, 2.5vw, 40px)", ...style,
-    }} {...rest}>
+    <div className="k-stepitem" style={style} {...rest}>
       <div style={{
         fontFamily: "var(--font-display)", fontWeight: "var(--fw-bold)",
         fontSize: "clamp(2.5rem, 4vw, 4rem)", lineHeight: 1, color: "var(--text-strong)",
@@ -14,7 +11,7 @@ export function StepItem({ index = "01", label = "Step", title, description, sty
         marginTop: "8px", fontFamily: "var(--font-text)", fontSize: "var(--fs-small)",
         color: "var(--text-muted)", textTransform: "lowercase",
       }}>{label}</div>
-      <div style={{ marginTop: "auto" }}>
+      <div className="k-stepitem-body">
         <h4 style={{
           margin: 0, fontFamily: "var(--font-display)", fontWeight: "var(--fw-semibold)",
           fontSize: "var(--fs-h4)", lineHeight: "var(--lh-heading)", color: "var(--text-strong)",

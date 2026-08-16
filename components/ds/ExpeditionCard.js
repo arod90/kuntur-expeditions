@@ -22,7 +22,7 @@ export function ExpeditionCard({
   ...rest
 }) {
   const imageBlock = (
-    <div style={{ position: "relative", borderRadius: "var(--radius-media)", overflow: "hidden", background: "var(--ink-700)", aspectRatio: "4 / 3" }}>
+    <div className="k-card-img" style={{ position: "relative", borderRadius: "var(--radius-media)", overflow: "hidden", background: "var(--ink-700)", aspectRatio: "4 / 3" }}>
       {image
         ? <Image src={image} alt={imageAlt} fill sizes="(max-width: 760px) 100vw, 45vw" placeholder="blur" style={{ objectFit: "cover" }} />
         : <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", color: "var(--text-faint)", border: "1px dashed var(--line-strong)", borderRadius: "var(--radius-media)", fontFamily: "var(--font-text)", fontSize: "var(--fs-small)", textAlign: "center", padding: "12px" }}>Expedition image</div>}
@@ -62,10 +62,7 @@ export function ExpeditionCard({
   );
 
   return (
-    <article style={{
-      display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "clamp(20px, 3vw, 44px)",
-      alignItems: "stretch", ...style,
-    }} {...rest}>
+    <article className="k-card" style={style} {...rest}>
       {imageSide === "left" ? <>{imageBlock}{textBlock}</> : <>{textBlock}{imageBlock}</>}
     </article>
   );

@@ -15,7 +15,7 @@ export function SectionHeading({ eyebrow, title, lead, align = "left" }) {
   return (
     <div style={{ marginBottom: "var(--space-6)" }}>
       <RevealLine />
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px 48px", justifyContent: "space-between", alignItems: "flex-end", paddingTop: "22px" }}>
+      <div className="k-sec-head" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", paddingTop: "22px" }}>
         <div style={{ maxWidth: "min(760px, 92%)" }}>
           {eyebrow ? <div style={{ marginBottom: "18px" }}><Eyebrow tick>{eyebrow}</Eyebrow></div> : null}
           <h2 style={{ margin: 0, fontFamily: "var(--font-display)", fontWeight: "var(--fw-bold)", fontSize: "var(--fs-h1)", lineHeight: "var(--lh-heading)", letterSpacing: "var(--ls-heading)", color: "var(--text-strong)", textWrap: "balance" }}>{title}</h2>

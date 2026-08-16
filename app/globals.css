@@ -109,6 +109,9 @@
   --section-y: clamp(48px, 6vw, 104px);
   --gutter: clamp(20px, 5vw, 72px);
   --maxw: 1600px;
+  --nav-h: 76px;
+  /* Full-viewport height that ignores the mobile URL bar (svh) when supported. */
+  --vh-full: 100vh;
 
   --radius-none: 0;
   --radius-sm: 4px;
@@ -218,3 +221,172 @@ html, body {
 *::-webkit-scrollbar-track { background: var(--ink-900); }
 a { color: var(--accent); }
 a:hover { color: var(--accent-hover); }
+img, video { max-width: 100%; }
+
+@supports (height: 100svh) {
+  :root { --vh-full: 100svh; }
+}
+
+/* ======================= RESPONSIVE LAYOUT ======================
+   Layout-affecting rules live here (not inline) so breakpoints can
+   override them. Desktop values are identical to the original design. */
+
+/* --- Nav --- */
+.k-nav-desktop { display: flex; }
+.k-nav-menu-cell { display: none; }
+.k-nav-drawer {
+  position: fixed; left: 0; right: 0; top: var(--nav-h); bottom: 0; z-index: 40;
+  display: none; flex-direction: column;
+  background: rgba(9,20,22,0.96);
+  -webkit-backdrop-filter: saturate(140%) blur(18px); backdrop-filter: saturate(140%) blur(18px);
+  padding: 28px var(--gutter) max(28px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  animation: kuntur-fade var(--dur-base) var(--ease-out) both;
+}
+.k-nav-drawer[data-open="true"] { display: flex; }
+.k-nav-drawer a { -webkit-tap-highlight-color: transparent; }
+.k-nav-drawer-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 0; text-decoration: none;
+  font-family: var(--font-display); font-weight: var(--fw-semibold);
+  font-size: clamp(1.6rem, 6.5vw, 2rem); letter-spacing: var(--ls-heading);
+  color: var(--text-strong); border-bottom: 1px solid var(--line-hair);
+  animation: kuntur-rise var(--dur-slow) var(--ease-out) both;
+}
+.k-nav-drawer-link[data-active="true"] { color: var(--accent); }
+.k-nav-drawer-link .k-nav-drawer-idx {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; color: var(--text-faint);
+}
+.k-nav-drawer-foot { margin-top: auto; padding-top: 32px; animation: kuntur-rise var(--dur-slow) var(--ease-out) 260ms both; }
+.k-nav-drawer-foot .k-nav-drawer-note { margin: 18px 0 0; font-size: var(--fs-small); color: var(--text-muted); line-height: 1.6; }
+
+/* --- Section heading --- */
+.k-sec-head { gap: 20px 48px; }
+.k-region-head { gap: 24px 48px; }
+
+/* --- Home --- */
+.k-worlds { display: flex; gap: clamp(12px,1.4vw,22px); align-items: flex-start; padding-top: 18px; }
+.k-worlds > * { flex: 1; min-width: 0; }
+.k-wild-1 { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(12px,1.4vw,22px); height: clamp(260px, 34vh, 420px); }
+.k-wild-2 { margin-top: clamp(12px,1.4vw,22px); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(12px,1.4vw,22px); height: clamp(180px, 24vh, 280px); }
+.k-how { display: grid; grid-template-columns: 0.9fr 2.4fr; gap: clamp(24px,3vw,64px); align-items: stretch; }
+.k-steps { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--line-hair); }
+.k-step { position: relative; padding-top: 28px; }
+.k-step-vline { position: absolute; left: 0; top: 0; bottom: 0; }
+.k-stepitem { display: flex; flex-direction: column; min-height: 260px; padding: 0 clamp(20px, 2.5vw, 40px); }
+.k-stepitem-body { margin-top: auto; }
+.k-home-title { bottom: 53%; }
+/* Portrait screens crop the hero to its centre, so the peak sits under the title — lift it. */
+@media (orientation: portrait) and (max-width: 1100px) { .k-home-title { bottom: 61%; } }
+
+/* --- Expedition card --- */
+.k-card { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(20px, 3vw, 44px); align-items: stretch; }
+.k-card > * { min-width: 0; }
+/* width must be explicit: an aspect-ratio box stretched by the grid row would otherwise size its width from the row height. */
+.k-card-img { width: 100%; }
+
+/* --- Expedition detail --- */
+.k-detail { display: grid; grid-template-columns: 1.7fr 1fr; gap: clamp(32px,4vw,80px); align-items: start; }
+.k-panel { position: sticky; top: 100px; background: var(--surface-card); border-radius: var(--radius-lg); padding: var(--space-6); border: 1px solid var(--line-hair); }
+.k-itin-row { display: grid; grid-template-columns: 100px 1fr; gap: 24px; padding: 20px 0 26px; }
+.k-detail-gal { margin-top: 24px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 18px; }
+.k-hero-meta { margin-top: 24px; display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
+
+/* --- Destinations galleries: columns + height set per-instance via vars --- */
+.k-gal { display: grid; grid-template-columns: var(--cols); gap: var(--gal-gap, clamp(12px,1.4vw,22px)); height: var(--h); }
+.k-gal + .k-gal { margin-top: var(--gal-gap, clamp(12px,1.4vw,22px)); }
+
+/* --- Guides / Contact / Footer --- */
+.k-story { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px,4vw,80px); align-items: center; }
+.k-roster { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(18px,2vw,32px); }
+.k-contact { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px,4vw,72px); align-items: start; }
+.k-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+.k-foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; align-items: start; }
+.k-foot-bar { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* ---------------------------- ≤ 1100px ---------------------------- */
+@media (max-width: 1100px) {
+  /* the cascade offsets the 4th panel by 90px; smaller section padding here needs the room */
+  .k-worlds { padding-bottom: 56px; }
+  .k-how { grid-template-columns: 1fr; }
+  .k-steps { grid-template-columns: repeat(2, 1fr); }
+  .k-step:nth-child(2n + 1) .k-step-vline { display: none; }
+  .k-step:nth-child(2n + 1) .k-stepitem { padding-left: 0; }
+  .k-step:nth-child(2n) .k-stepitem { padding-right: 0; }
+  .k-step:nth-child(n + 3) { border-top: 1px solid var(--line-hair); }
+  .k-stepitem { min-height: 190px; }
+  .k-roster { grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 3.5vw, 40px); }
+}
+
+/* ---------------------------- ≤ 900px ----------------------------- */
+@media (max-width: 900px) {
+  .k-nav-desktop { display: none; }
+  .k-nav-menu-cell { display: flex; }
+
+  .k-detail { grid-template-columns: 1fr; gap: var(--space-7); }
+  .k-panel { position: static; order: -1; }
+  .k-detail-gal { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .k-detail-gal > :first-child { grid-column: 1 / -1; }
+  .k-story { grid-template-columns: 1fr; gap: var(--space-7); }
+  .k-story-media { aspect-ratio: 4 / 3 !important; }
+  .k-contact { grid-template-columns: 1fr; gap: var(--space-8); }
+  .k-foot-grid { grid-template-columns: 1fr 1fr; gap: 36px 28px; }
+  .k-foot-grid > :first-child { grid-column: 1 / -1; }
+}
+
+/* ---------------------------- ≤ 760px ----------------------------- */
+@media (max-width: 760px) {
+  .k-worlds { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding-top: 12px; padding-bottom: 14px; }
+  .k-wild-1, .k-wild-2 { grid-template-columns: 1fr; height: auto; gap: 14px; }
+  .k-wild-2 { margin-top: 14px; }
+  .k-wild-1 > *, .k-wild-2 > * { aspect-ratio: 4 / 3; height: auto; }
+  .k-gal { grid-template-columns: 1fr !important; height: auto !important; gap: 14px; }
+  .k-gal + .k-gal { margin-top: 14px; }
+  .k-gal > * { aspect-ratio: 4 / 3; height: auto; }
+  /* 3-image rows: one wide, then two portrait side by side */
+  .k-gal:has(> :nth-child(3)), .k-wild-2 { grid-template-columns: 1fr 1fr !important; }
+  .k-gal:has(> :nth-child(3)) > :first-child, .k-wild-2 > :first-child { grid-column: 1 / -1; }
+  .k-gal:has(> :nth-child(3)) > :not(:first-child), .k-wild-2 > :not(:first-child) { aspect-ratio: 4 / 5; }
+  .k-card { gap: 22px; }
+  .k-card > .k-card-img { order: -1; }
+  .k-card-img { aspect-ratio: 16 / 11 !important; }
+}
+
+/* ---------------------------- ≤ 640px ----------------------------- */
+@media (max-width: 640px) {
+  :root {
+    --nav-h: 64px;
+    --fs-mega: clamp(2.6rem, 11.5vw, 3.6rem);
+    --fs-display: clamp(2.3rem, 9.5vw, 3rem);
+    --fs-h1: clamp(1.9rem, 7.6vw, 2.4rem);
+    --fs-h2: clamp(1.5rem, 6vw, 1.85rem);
+    --fs-h3: 1.3rem;
+    --fs-h4: 1.125rem;
+    --fs-lead: 1.125rem;
+    --section-y: 56px;
+  }
+  .k-steps { grid-template-columns: 1fr; }
+  .k-step .k-step-vline { display: none; }
+  .k-step + .k-step { border-top: 1px solid var(--line-hair); }
+  .k-step { padding-top: 22px; }
+  .k-stepitem { min-height: 0; padding: 0 0 26px; }
+  .k-stepitem-body { margin-top: 18px; }
+  .k-itin-row { grid-template-columns: 64px 1fr; gap: 16px; padding: 18px 0 22px; }
+  .k-panel { padding: var(--space-5); }
+  .k-hero-meta { gap: 14px 22px; margin-top: 18px; }
+  .k-form-row { grid-template-columns: 1fr; }
+  .k-foot-bar { flex-direction: column; gap: 8px; }
+  .k-sec-head { gap: 16px 32px; }
+}
+
+/* ---------------------------- ≤ 480px ----------------------------- */
+@media (max-width: 480px) {
+  .k-brand-suffix { display: none; }
+  .k-roster { grid-template-columns: 1fr; gap: 36px; }
+  .k-worlds { gap: 12px; }
+}
+
+/* Touch devices: no hover lifts, larger tap targets. */
+@media (hover: none) {
+  .k-worlds > button { transition-duration: 700ms; }
+}

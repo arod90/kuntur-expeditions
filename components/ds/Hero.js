@@ -14,7 +14,7 @@ export function Hero({
   subtitle,
   cta,
   onCta,
-  height = "100vh",
+  height = "var(--vh-full)",
   parallax = 0,
   parallaxSpeed = 0,
   kenBurns = true,

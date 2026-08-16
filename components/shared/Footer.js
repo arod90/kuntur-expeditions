@@ -10,7 +10,7 @@ export function Footer({ onNavigate }) {
   return (
     <footer style={{ background: "var(--ink-900)", padding: "var(--space-9) 0 var(--space-7)", color: "var(--paper-100)", fontFamily: "var(--font-text)" }}>
       <div style={{ maxWidth: "var(--maxw)", margin: "0 auto", padding: "0 var(--gutter)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: "40px", alignItems: "start" }}>
+        <div className="k-foot-grid">
           <div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: "var(--fw-extrabold)", fontSize: "1.9rem", letterSpacing: "-0.02em" }}>
               Kuntur<span style={{ fontWeight: 400, opacity: 0.65, marginLeft: 8 }}>Expeditions</span>
@@ -29,7 +29,7 @@ export function Footer({ onNavigate }) {
           ))}
         </div>
         <div style={{ margin: "var(--space-8) 0 var(--space-6)" }}><Divider /></div>
-        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12, color: "var(--text-faint)", fontSize: "var(--fs-small)" }}>
+        <div className="k-foot-bar" style={{ color: "var(--text-faint)", fontSize: "var(--fs-small)" }}>
           <span>© 2026 Kuntur Expeditions — a portfolio concept.</span>
           <span>Quito · Cotopaxi · Baños · Galápagos</span>
         </div>

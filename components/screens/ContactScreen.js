@@ -33,7 +33,7 @@ export function ContactScreen() {
   return (
     <div>
       <Section>
-        <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: "clamp(28px,4vw,72px)", alignItems: "start" }}>
+        <div className="k-contact">
           {/* Form */}
           <div>
             <Eyebrow tick>Plan with us</Eyebrow>
@@ -49,7 +49,7 @@ export function ContactScreen() {
               </div>
             ) : (
               <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display: "grid", gap: "var(--space-5)" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-5)" }}>
+                <div className="k-form-row">
                   <Field label="Name"><input required style={inputStyle} value={form.name} onChange={set("name")} placeholder="Your name" /></Field>
                   <Field label="Email"><input required type="email" style={inputStyle} value={form.email} onChange={set("email")} placeholder="you@email.com" /></Field>
                 </div>

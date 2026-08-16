@@ -30,10 +30,10 @@ export function ExpeditionDetailScreen({ id = "cotopaxi" }) {
 
   return (
     <div>
-      <Hero image={hero} height="82vh" parallaxSpeed={0.3} align="left" priority
+      <Hero image={hero} height="calc(var(--vh-full) * 0.82)" parallaxSpeed={0.3} align="left" priority
         eyebrow={<Eyebrow tick>Andes &amp; Páramo</Eyebrow>}
         title={data.title || "7-Day Cotopaxi & Páramo Traverse"}>
-        <div style={{ marginTop: 24, display: "flex", gap: 28, flexWrap: "wrap", alignItems: "center", animation: "kuntur-rise var(--dur-slow) var(--ease-out) 460ms both" }}>
+        <div className="k-hero-meta" style={{ animation: "kuntur-rise var(--dur-slow) var(--ease-out) 460ms both" }}>
           <StarRating value={data.rating || 5} showValue />
           <span style={{ color: "var(--paper-100)", fontSize: "var(--fs-small)" }}>Trusted by {data.trust || "190+"} travellers</span>
           <Button variant="ghost" leadingIcon="arrow-left" onClick={() => go("Expeditions")}>All expeditions</Button>
@@ -41,7 +41,7 @@ export function ExpeditionDetailScreen({ id = "cotopaxi" }) {
       </Hero>
 
       <Section>
-        <div style={{ display: "grid", gridTemplateColumns: "1.7fr 1fr", gap: "clamp(32px,4vw,80px)", alignItems: "start" }}>
+        <div className="k-detail">
           {/* Itinerary */}
           <div>
             <Eyebrow tick>Day by day</Eyebrow>
@@ -49,7 +49,7 @@ export function ExpeditionDetailScreen({ id = "cotopaxi" }) {
             {itinerary.map((it, i) => (
               <Reveal key={it.d} delay={i * 40}>
                 <div style={{ paddingTop: 22 }}><RevealLine delay={i * 40} /></div>
-                <div style={{ display: "grid", gridTemplateColumns: "100px 1fr", gap: 24, padding: "20px 0 26px" }}>
+                <div className="k-itin-row">
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: "var(--fs-small)", color: "var(--accent)", letterSpacing: "0.02em" }}>{it.d}</div>
                   <div>
                     <h3 style={{ margin: 0, fontFamily: "var(--font-display)", fontWeight: "var(--fw-semibold)", fontSize: "var(--fs-h3)", color: "var(--text-strong)", letterSpacing: "var(--ls-heading)" }}>{it.t}</h3>
@@ -61,7 +61,7 @@ export function ExpeditionDetailScreen({ id = "cotopaxi" }) {
           </div>
 
           {/* Sticky booking panel */}
-          <div style={{ position: "sticky", top: "100px", background: "var(--surface-card)", borderRadius: "var(--radius-lg)", padding: "var(--space-6)", border: "1px solid var(--line-hair)" }}>
+          <div className="k-panel">
             <div style={{ fontFamily: "var(--font-text)", color: "var(--text-muted)", fontSize: "var(--fs-body)" }}>from</div>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: "var(--fw-extrabold)", fontSize: "3rem", lineHeight: 1, letterSpacing: "-0.02em", color: "var(--text-strong)" }}>{data.price || "$1,000"}</div>
             <div style={{ color: "var(--text-muted)", fontSize: "var(--fs-small)", marginTop: 6 }}>per traveller · all-inclusive</div>
@@ -81,9 +81,9 @@ export function ExpeditionDetailScreen({ id = "cotopaxi" }) {
       {/* Gallery band */}
       <Section tint="var(--ink-900)" style={{ paddingTop: "var(--space-8)" }}>
         <Eyebrow tick>On the trail</Eyebrow>
-        <div style={{ marginTop: 24, display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 18 }}>
-          <HoverVideo poster={IMG.cotopaxi} label="Summit sunrise" ratio="16 / 10" sizes="(max-width: 700px) 100vw, 50vw" />
-          <HoverVideo poster={IMG.plaza} label="Quito plaza" ratio="4 / 5" sizes="(max-width: 700px) 100vw, 25vw" />
+        <div className="k-detail-gal">
+          <HoverVideo poster={IMG.cotopaxi} label="Summit sunrise" ratio="16 / 10" sizes="(max-width: 900px) 100vw, 50vw" />
+          <HoverVideo poster={IMG.plaza} label="Quito plaza" ratio="4 / 5" sizes="(max-width: 900px) 50vw, 25vw" />
           <HoverVideo label="Add clip" ratio="4 / 5" />
         </div>
       </Section>

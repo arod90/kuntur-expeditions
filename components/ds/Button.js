@@ -83,7 +83,7 @@ export function Button({
   return (
     <Tag
       onClick={disabled ? undefined : onClick}
-      onMouseEnter={() => setHover(true)}
+      onMouseEnter={() => { if (!window.matchMedia || window.matchMedia("(hover: hover)").matches) setHover(true); }}
       onMouseLeave={() => setHover(false)}
       disabled={Tag === "button" ? disabled : undefined}
       style={rootStyle}

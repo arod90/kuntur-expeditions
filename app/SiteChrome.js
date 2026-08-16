@@ -47,7 +47,7 @@ export function SiteChrome({ children }) {
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 50 }}>
         <NavBar key={pathname} variant={navVariant} animateIn startDelay={startDelay} links={links} onNavigate={go} />
         <div key={"sweep" + pathname} aria-hidden="true" style={{
-          position: "absolute", left: 0, right: 0, top: "76px", height: "2px",
+          position: "absolute", left: 0, right: 0, top: "var(--nav-h)", height: "2px",
           background: "var(--accent)", transformOrigin: "left center",
           animation: "kuntur-sweep 620ms var(--ease-in-out) both",
         }} />
@@ -56,7 +56,7 @@ export function SiteChrome({ children }) {
       {/* Scroll container */}
       <div id="kuntur-scroll" ref={scrollRef} onScroll={onScroll}
         style={{ position: "absolute", inset: 0, overflowY: "auto", overflowX: "hidden" }}>
-        <div style={{ paddingTop: isHero ? 0 : "76px" }}>
+        <div style={{ paddingTop: isHero ? 0 : "var(--nav-h)" }}>
           <div key={pathname} style={{ animation: "kuntur-rise var(--dur-base) var(--ease-out) both" }}>
             {children}
           </div>
